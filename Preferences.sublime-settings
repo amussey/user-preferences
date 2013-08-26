@@ -8,5 +8,6 @@
     "font_size": 12,
     "theme": "Flatland Dark.sublime-theme",
     "translate_tabs_to_spaces": true,
-    "spell_check": true
+    "spell_check": true,
+    "ensure_newline_at_eof_on_save": true
 }
