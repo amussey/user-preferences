@@ -37,3 +37,9 @@ function _update_ps1() {
     export PS1="$(~/.powerline-shell/powerline-shell.py $?)"
 }
 export PROMPT_COMMAND="_update_ps1"
+
+
+# git Autocomplete
+# Originally created by Shawn O. Pearce <spearce@spearce.org>
+# Allows for tab autocompletion of branch names while using git.
+source bash/git-completion.bash
