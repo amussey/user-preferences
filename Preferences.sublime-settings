@@ -9,5 +9,6 @@
     "theme": "Flatland Dark.sublime-theme",
     "translate_tabs_to_spaces": true,
     "spell_check": true,
+    "default_line_ending": "unix",
     "ensure_newline_at_eof_on_save": true
 }
