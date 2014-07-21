@@ -1,0 +1,6 @@
+[color]
+    ui = true
+[user]
+    name = Andrew Mussey
+[core]
+    editor = subl -n -w
