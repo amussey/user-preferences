@@ -1,0 +1,25 @@
+#!/bin/bash
+# Save this file in your local git repo at:
+#     .git/hooks/prepare-commit-msg
+#
+# (no *.sh file extension)
+# Then, run:
+#     chmod +x prepare-commit-msg
+
+BRANCH_NAME=$(git branch 2>/dev/null | grep -e ^* | tr -d ' *')
+BRANCH_HEADER=($(echo $BRANCH_NAME | tr '[:lower:]' '[:upper:]' | tr "//" "\n"))
+COMMIT_MESSAGE=`cat $1`
+CURRENT_COMMIT_HEAD=$(echo ${COMMIT_MESSAGE:0:${#BRANCH_HEADER[0]}} | tr '[:lower:]' '[:upper:]')
+if [ "$BRANCH_NAME" != "master" ]
+then
+    if [ "${BRANCH_HEADER[0]}" != "$CURRENT_COMMIT_HEAD" ]
+    then
+        if [[ "${BRANCH_HEADER[0]}" =~ [A-Z]-[0-9]+ ]]
+        then
+            echo "${BRANCH_HEADER[0]}: $COMMIT_MESSAGE" > $1
+        elif [[ "${BRANCH_HEADER[0]}" == "HACKDAY" ]]
+        then
+            echo "Hackday: $COMMIT_MESSAGE" > $1
+        fi
+    fi
+fi

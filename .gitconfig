@@ -4,3 +4,5 @@
     name = Andrew Mussey
 [core]
     editor = subl -n -w
+[init]
+    templatedir = ~/.git-templates
