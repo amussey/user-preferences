@@ -51,3 +51,10 @@ export PROMPT_COMMAND="_update_ps1"
 # Originally created by Shawn O. Pearce <spearce@spearce.org>
 # Allows for tab autocompletion of branch names while using git.
 source bash/git-completion.bash
+
+
+# Onport command
+# This command will tell you the applications running on a specific port.
+function onport() {
+    sudo lsof -i :$1
+}
