@@ -25,6 +25,14 @@ function _jump {
 complete -o default -o nospace -F _jump jump
 
 
+# Colored Command Shell
+#
+# This is a great lightweight alternative to the full Powerline Shell.
+# This displays in the form:
+#     [user@system-name:~]#
+export PS1='\[\e[1;33m\][\[\e[0m\]\[\e[1;32m\]\u\[\e[0m\]\[\e[1;33m\]@\[\e[0m\]\[\e[1;34m\]$HOSTNAME\[\e[0m\]\[\e[1;33m\]:\[\e[0m\]\[\e[1;31m\]\w\[\e[0m\]\[\e[1;33m\]]\$\[\e[0m\] '
+
+
 # Powerline Shell
 # https://github.com/milkbikis/powerline-shell
 #
