@@ -1,4 +1,5 @@
 {
+    // "update_check": false,
     "ignored_packages":
     [
         "Vintage"
