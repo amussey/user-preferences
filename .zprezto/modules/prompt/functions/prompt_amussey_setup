@@ -1,0 +1,101 @@
+#
+# A simple theme that displays relevant, contextual information.
+#
+# Authors:
+#   Andrew Mussey <admin@ajama.org>
+#
+# Based on the sorin theme by Sorin Ionescu <sorin.ionescu@gmail.com>.
+#
+# Screenshots:
+#   http://i.imgur.com/6b5pbiL.png
+#
+
+# Load dependencies.
+pmodload 'helper'
+
+function prompt_amussey_pwd {
+  local pwd="${PWD/#$HOME/~}"
+
+  if [[ "$pwd" == (#m)[/~] ]]; then
+    _prompt_amussey_pwd="$MATCH"
+    unset MATCH
+  else
+    _prompt_amussey_pwd="${${${${(@j:/:M)${(@s:/:)pwd}##.#?}:h}%/}//\%/%%}/${${pwd:t}//\%/%%}"
+  fi
+}
+
+function prompt_amussey_precmd {
+  setopt LOCAL_OPTIONS
+  unsetopt XTRACE KSH_ARRAYS
+
+  # Format PWD.
+  prompt_amussey_pwd
+
+  # Get Git repository information.
+  if (( $+functions[git-info] )); then
+    git-info
+  fi
+
+  # Get Git repository information.
+  if (( $+functions[python-info] )); then
+    export VIRTUAL_ENV_DISABLE_PROMPT='1'
+    python-info
+  fi
+}
+
+function prompt_amussey_setup {
+  setopt LOCAL_OPTIONS
+  unsetopt XTRACE KSH_ARRAYS
+  prompt_opts=(cr percent subst)
+
+  # Load required functions.
+  autoload -Uz add-zsh-hook
+
+  # Add hook for calling git-info before each command.
+  add-zsh-hook precmd prompt_amussey_precmd
+
+  # Set editor-info parameters.
+  zstyle ':prezto:module:editor:info:completing' format '%B%F{red}...%f%b'
+  zstyle ':prezto:module:editor:info:keymap:primary' format ' %B%(?;%{%F{green}%} ;%{%F{red}%} )>%f%b'
+  # zstyle ':prezto:module:editor:info:keymap:primary' format ' %B%F{red}>%F{yellow}❯%F{green}❯%f%b'
+  zstyle ':prezto:module:editor:info:keymap:primary:overwrite' format ' %F{red}♺%f'
+  zstyle ':prezto:module:editor:info:keymap:alternate' format ' %B%F{green}❮%F{yellow}❮%F{red}❮%f%b'
+
+  # Set python-info parameters
+  zstyle ':prezto:module:python:info:virtualenv' format " %F{magenta}(%v)%f"
+
+  # Set git-info parameters.
+  zstyle ':prezto:module:git:info' verbose 'yes'
+  zstyle ':prezto:module:git:info:action' format ':%%B%F{yellow}%s%f%%b'
+  # zstyle ':prezto:module:git:info:added' format ' %%B%F{green}✚%f%%b'
+  zstyle ':prezto:module:git:info:ahead' format ' %%B%F{yellow}⬆%f%%b'
+  zstyle ':prezto:module:git:info:behind' format ' %%B%F{yellow}⬇%f%%b'
+  zstyle ':prezto:module:git:info:branch' format '%b'
+  zstyle ':prezto:module:git:info:dirty' format '%F{red}'
+  zstyle ':prezto:module:git:info:clean' format '%F{green}'
+  zstyle ':prezto:module:git:info:commit' format ':%F{green}%.7c%f'
+  zstyle ':prezto:module:git:info:deleted' format ' %%B%F{red}✖%f%%b'
+  zstyle ':prezto:module:git:info:modified' format ' %%B%F{blue}✱%f%%b'
+  # zstyle ':prezto:module:git:info:position' format ':%F{red}%p%f'
+  zstyle ':prezto:module:git:info:renamed' format ' %%B%F{magenta}➜%f%%b'
+  zstyle ':prezto:module:git:info:stashed' format ' %%B%F{cyan}✭%f%%b'
+  zstyle ':prezto:module:git:info:unmerged' format ' %%B%F{yellow}═%f%%b'
+  zstyle ':prezto:module:git:info:untracked' format '+' #' %%B%F{white}◼%f%%b'
+  zstyle ':prezto:module:git:info:keys' format \
+    'prompt' ' %D%C%b%u%f%s' \
+    'rprompt' '%A%B%S%a%d%m%r%U'
+
+  # colors http://jpace.files.wordpress.com/2013/05/bg_on_black.png
+
+  # Build the username and machine name string
+  USER_MACHINE="%F{11}%n%f@%F{9}%m%f"
+
+  # Define prompts.
+  # Removed: %(!. %B%F{red}#%f%b.)
+  PROMPT='${USER_MACHINE}${SSH_TTY:+"%F{red}%n%f@%F{yellow}%m%f "}:%F{blue}%~%f${git_info:+${(e)git_info[prompt]}}$python_info[virtualenv]${editor_info[keymap]} '
+  RPROMPT='${editor_info[overwrite]}%(?:: %F{red}⏎%f)${VIM:+" %B%F{green}V%f%b"}${INSIDE_EMACS:+" %B%F{green}E%f%b"}${git_info[rprompt]}'
+  # RPROMPT='%t'
+  SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
+}
+
+prompt_amussey_setup "$@"
