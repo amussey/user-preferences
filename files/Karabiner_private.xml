@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<root>
+  <appdef>
+    <appname>TEAMVIEWER</appname>
+    <equal>com.TeamViewer.TeamViewer</equal>
+    <equal>com.teamviewer.TeamViewer</equal>
+  </appdef>
+
+  <item>
+    <name>Disable all settings while you are using TeamViewer.</name>
+    <identifier>private.ignore_teamviewer</identifier>
+    <only>TEAMVIEWER</only>
+    <autogen>__PassThrough__</autogen>
+  </item>
+</root>
