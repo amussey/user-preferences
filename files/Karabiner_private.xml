@@ -1,5 +1,16 @@
 <?xml version="1.0"?>
 <root>
+  <list>
+    <item>
+      <name>Print Screen bound to take a Screen Shot</name>
+      <identifier>private.printscreen.screenshot</identifier>
+      <autogen>
+        __KeyToKey__
+        KeyCode::F13,
+        KeyCode::KEY_4, ModifierFlag::COMMAND_L | ModifierFlag::SHIFT_L
+      </autogen>
+    </item>
+  </list>
   <appdef>
     <appname>TEAMVIEWER</appname>
     <equal>com.TeamViewer.TeamViewer</equal>
