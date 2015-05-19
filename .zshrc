@@ -33,3 +33,9 @@ compctl -K _completemarks unmark
 function onport() {
     sudo lsof -i :$1
 }
+
+
+# Set the title on the current window.
+function title {
+    echo -ne "\e]1;$1\a"
+}
