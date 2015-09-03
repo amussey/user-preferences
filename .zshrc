@@ -1,3 +1,13 @@
+
+
+# Default ZSH setup stuff.
+unset SSH_AUTH_SOCK
+# Source Prezto.
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
+
+
 # Allows for marking and jumping to directories deep in the filesystem.
 # Taken from Jeroen Janssens's article "Quickly navigate your filesystem from the command-line"
 # URL:        http://jeroenjanssens.com/2013/08/16/quickly-navigate-your-filesystem-from-the-command-line.html
