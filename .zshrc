@@ -49,3 +49,12 @@ function onport() {
 function title {
     echo -ne "\e]1;$1\a"
 }
+
+
+# Shorthand for creating and activating a Python virtualenv.
+function vs {
+    if [ ! -f "$1/bin/activate" ]; then
+        virtualenv $1
+    fi
+    source $1/bin/activate
+}
