@@ -9,4 +9,9 @@ A collection of my favorite preferences for different apps, stored in a repo for
 Theme - Flatland
 SFTP
 Vagrant
+GitGutter
+MarkDownEditing
+SublimeLinter
+SublimeLinter-coffeelint
+SublimeLinter-flake8
 ```
