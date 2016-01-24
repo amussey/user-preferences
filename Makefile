@@ -48,4 +48,9 @@ ifeq ($(UNAME), Darwin)
 	command -v subl >/dev/null 2>&1 || { sudo ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/bin/subl; }
 endif
 
+photos:  # Stop Photos from automatically opening when an SD card is plugged in.
+ifeq ($(UNAME), Darwin)
+	defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
+endif
+
 bootstrap: sublime vagrant zsh
