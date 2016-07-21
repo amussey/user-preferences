@@ -53,4 +53,10 @@ ifeq ($(UNAME), Darwin)
 	defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 endif
 
+save_panel:  # Make the save panel automatically expand.
+ifeq ($(UNAME), Darwin)
+	defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
+	defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
+endif
+
 bootstrap: sublime vagrant zsh
