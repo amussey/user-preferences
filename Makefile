@@ -59,4 +59,13 @@ ifeq ($(UNAME), Darwin)
 	defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
 endif
 
+ffmpeg:  # Install ffmpeg.
+ifeq ($(UNAME), Darwin)
+	curl http://www.ffmpegmac.net/resources/SnowLeopard_Lion_Mountain_Lion_Mavericks_Yosemite_El-Captain_06.07.2016.zip -O
+	unzip SnowLeopard_Lion_Mountain_Lion_Mavericks_Yosemite_El-Captain_06.07.2016.zip
+	rm SnowLeopard_Lion_Mountain_Lion_Mavericks_Yosemite_El-Captain_06.07.2016.zip
+	mv ff* /usr/local/bin
+
+endif
+
 bootstrap: sublime vagrant zsh
