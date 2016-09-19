@@ -14,4 +14,6 @@ MarkDownEditing
 SublimeLinter
 SublimeLinter-coffeelint
 SublimeLinter-flake8
+PyRefactor
+INI
 ```

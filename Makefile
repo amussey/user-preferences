@@ -33,7 +33,7 @@ ifeq ($(UNAME), Darwin)
 	brew cask install vagrant-manager
 endif
 
-zsh: brew
+zsh: brew zshrc_files
 ifeq ($(UNAME), Darwin)
 	command -v zsh >/dev/null 2>&1 || { echo "ZSH already installed and configured."; exit 1; }
 	brew install zsh
@@ -45,7 +45,7 @@ endif
 
 sublime:
 ifeq ($(UNAME), Darwin)
-	command -v subl >/dev/null 2>&1 || { sudo ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/bin/subl; }
+	command -v subl >/dev/null 2>&1 || { sudo ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/local/bin/subl; }
 endif
 
 photos:  # Stop Photos from automatically opening when an SD card is plugged in.
@@ -65,7 +65,17 @@ ifeq ($(UNAME), Darwin)
 	unzip SnowLeopard_Lion_Mountain_Lion_Mavericks_Yosemite_El-Captain_06.07.2016.zip
 	rm SnowLeopard_Lion_Mountain_Lion_Mavericks_Yosemite_El-Captain_06.07.2016.zip
 	mv ff* /usr/local/bin
-
 endif
 
-bootstrap: sublime vagrant zsh
+zshrc_files:
+	cp -r .zshrc-files ~
+
+common_packages: brew
+ifeq ($(UNAME), Darwin)
+	brew install htop
+endif
+
+# Common packages for Macs.
+mac: osx
+osx: bootstrap
+bootstrap: sublime vagrant zsh common_packages

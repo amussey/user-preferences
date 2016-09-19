@@ -50,11 +50,67 @@ function title {
     echo -ne "\e]1;$1\a"
 }
 
+alias vs=vs3
 
-# Shorthand for creating and activating a Python virtualenv.
-function vs {
+# Shorthand for creating and activating a Python 2 virtualenv.
+function vs2 {
     if [ ! -f "$1/bin/activate" ]; then
-        virtualenv $1
+        virtualenv -p "/usr/local/bin/python2" $1
     fi
     source $1/bin/activate
 }
+
+# Shorthand for creating and activating a Python 3 virtualenv.
+function vs3 {
+    if [ ! -f "$1/bin/activate" ]; then
+        virtualenv -p "/usr/local/bin/python3" $1
+    fi
+    source $1/bin/activate
+}
+
+
+# Initiate a new Python project in the current folder.
+function pystart {
+    vs env
+    pip install ipdb ipython
+    deactivate
+    vs env
+    echo "env/\n.env\n*.pyc" > .gitignore
+    git init
+    echo "# ${PWD##*/}" > README.md
+    echo "[flake8]\nignore = E501\n\n[pep8]\nignore = E501" > setup.cfg
+    alias ipython=ipython2
+    cp ~/.zshrc-files/pystart/Makefile Makefile
+}
+
+
+# htop on OSX requires root privileges to run.
+alias htop="sudo htop"
+
+
+# Commands for starting and stopping PostgreSql manually.
+function postgres-start {
+    command -v pg_ctl >/dev/null 2>&1 || { echo >&2 "This command requires Postgres to be installed.  Please use \`brew install postgres\`."; exit 1; }
+    pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start
+}
+
+function postgres-stop {
+    command -v pg_ctl >/dev/null 2>&1 || { echo >&2 "This command requires Postgres to be installed.  Please use \`brew install postgres\`."; exit 1; }
+    pg_ctl -D /usr/local/var/postgres stop -s -m fast
+}
+
+# Convert a movie file to a GIF with FFMPEG.
+# Parameters:
+#     movie-to-gif [movie file] [movie start time] [gif duration]
+function movie-to-gif {
+    filename=$(basename "$1")
+    start_time="$2"
+    duration="$3"
+    pallet="${filename%.*}.png"
+    output_gif="${filename%.*}.gif"
+    ffmpeg -y -ss "$start_time" -t "$duration" -i "$1" -vf fps=15,scale=480:-1:flags=lanczos,palettegen "$pallet"
+    ffmpeg -ss "$start_time" -t "$duration" -i "$1" -i "$pallet" -filter_complex "fps=15,scale=480:-1:flags=lanczos[x];[x][1:v]paletteuse" "$output_gif"
+}
+
+
+stty sane
