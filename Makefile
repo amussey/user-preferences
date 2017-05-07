@@ -37,11 +37,11 @@ zsh: brew zshrc_files
 ifeq ($(UNAME), Darwin)
 	command -v zsh >/dev/null 2>&1 || { echo "ZSH already installed and configured."; exit 1; }
 	brew install zsh
+endif
 	git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
 	cp ./.zprezto/modules/prompt/functions/prompt_amussey_setup ~/.zprezto/modules/prompt/functions/prompt_amussey_setup
 	cp ./.zpreztorc ~/.zpreztorc
 	cp ./.zshrc ~/.zshrc
-endif
 
 sublime:
 ifeq ($(UNAME), Darwin)
