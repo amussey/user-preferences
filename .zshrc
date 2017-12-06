@@ -113,4 +113,6 @@ function movie-to-gif {
 }
 
 
+export PATH="/usr/local/opt/tcl-tk/bin:$PATH"
+
 stty sane
