@@ -46,8 +46,9 @@ endif
 	cp ./.zpreztorc ~/.zpreztorc
 	cp ./.zshrc ~/.zshrc
 
-sublime:
+sublime: brew
 ifeq ($(UNAME), Darwin)
+	brew cask install sublime-text
 	command -v subl >/dev/null 2>&1 || { sudo ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/local/bin/subl; }
 endif
 
@@ -79,6 +80,7 @@ endif
 
 duplicati:
 ifeq ($(UNAME), Darwin)
+	brew cask install duplicati
 	sudo curl https://gist.githubusercontent.com/mohakshah/6ec2351bcf8e6898b4a3f79bfc2f12cf/raw/458edb327a7e2a75d1bbd70888dc39b9a3743065/net.duplicati.tray-icon.plist -o /Library/LaunchAgents/net.duplicati.tray-icon.plist
 	sudo curl https://gist.githubusercontent.com/mohakshah/6ec2351bcf8e6898b4a3f79bfc2f12cf/raw/458edb327a7e2a75d1bbd70888dc39b9a3743065/net.duplicati.server.plist -o /Library/LaunchDaemons/net.duplicati.server.plist
 	sudo launchctl load -w /Library/LaunchDaemons/net.duplicati.server.plist
@@ -87,9 +89,30 @@ endif
 zshrc_files:
 	cp -r .zshrc-files ~
 
-common_packages: brew
+common_packages: brew sublime duplicati vagrant
 ifeq ($(UNAME), Darwin)
 	brew install htop
+	brew cask install caffeine
+	brew cask install bartender
+	brew cask install clocker
+	brew cask install google-chrome
+	brew cask install firefox
+	brew cask install steam
+	brew cask install franz
+	brew cask install docker
+	brew cask install docker-toolbox
+	brew cask install dropbox
+	brew cask install spectacle
+	brew cask install iterm2
+	brew cask install spotify
+	brew cask install tunnelblick
+	brew cask install private-internet-access
+	brew cask install handbrake
+	brew cask install teamviewer
+	brew cask install grandperspective
+	brew cask install filezilla
+	brew cask install cd-to
+	brew cask install vlc
 endif
 
 # Common packages for Macs.
