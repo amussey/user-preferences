@@ -89,7 +89,16 @@ endif
 zshrc_files:
 	cp -r .zshrc-files ~
 
-common_packages: brew sublime duplicati vagrant
+spotify: brew
+ifeq ($(UNAME), Darwin)
+	brew cask install spotify
+	if [ ! $$(grep "storage.size" "$$HOME/Library/Application Support/Spotify/prefs") ] ; \
+	then echo "storage.size=2048" >> "$$HOME/Library/Application Support/Spotify/prefs" ; \
+	else echo "prefs already updated." ; \
+	fi
+endif
+
+common_packages: brew sublime duplicati vagrant spotify
 ifeq ($(UNAME), Darwin)
 	brew install htop
 	brew cask install caffeine
@@ -104,7 +113,6 @@ ifeq ($(UNAME), Darwin)
 	brew cask install dropbox
 	brew cask install spectacle
 	brew cask install iterm2
-	brew cask install spotify
 	brew cask install tunnelblick
 	brew cask install private-internet-access
 	brew cask install handbrake
