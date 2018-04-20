@@ -52,6 +52,13 @@ ifeq ($(UNAME), Darwin)
 	command -v subl >/dev/null 2>&1 || { sudo ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/local/bin/subl; }
 endif
 
+vscode: brew
+ifeq ($(UNAME), Darwin)
+	brew cask install visual-studio-code
+	mv "/Users/andrewmussey/Library/Application Support/Code/User/settings.json" "/Users/andrewmussey/Library/Application Support/Code/User/settings.`date -u +"%Y-%m-%d_%H-%M-%S"`.json"
+	cp ./VSCode/settings.json "/Users/andrewmussey/Library/Application Support/Code/User/settings.json"
+endif
+
 python:
 ifeq ($(UNAME), Darwin)
 	brew install tcl-tk

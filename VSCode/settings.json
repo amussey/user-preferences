@@ -1,0 +1,23 @@
+{
+    // Theming
+    "workbench.colorTheme": "Monokai Dimmed",
+    "workbench.iconTheme": "easy-icons",
+    "workbench.welcome.enabled": false,
+    "editor.fontSize": 12,
+
+    // Whitespace on save
+    "files.eol": "\n",
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+    "files.trimTrailingWhitespace": true,
+
+    // Translate tabs to spaces.
+    "editor.detectIndentation": false,
+    "editor.insertSpaces": true,
+
+    // Sublime Text Features
+    "sublimeTextKeymap.promptV3Features": true,
+    "editor.multiCursorModifier": "ctrlCmd",
+    "editor.snippetSuggestions": "top",
+    "editor.formatOnPaste": true
+}
