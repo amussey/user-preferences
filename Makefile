@@ -105,28 +105,32 @@ ifeq ($(UNAME), Darwin)
 	fi
 endif
 
-common_packages: brew sublime duplicati vagrant spotify
+common_packages: brew sublime vagrant spotify
 ifeq ($(UNAME), Darwin)
 	brew install htop
-	brew cask install caffeine
+	brew cask install android-file-transfer
+	brew cask install android-platform-tools
+	brew cask install arq
 	brew cask install bartender
+	brew cask install caffeine
+	brew cask install cd-to
 	brew cask install clocker
-	brew cask install google-chrome
-	brew cask install firefox
-	brew cask install steam
-	brew cask install franz
 	brew cask install docker
 	brew cask install docker-toolbox
 	brew cask install dropbox
-	brew cask install spectacle
-	brew cask install iterm2
-	brew cask install tunnelblick
-	brew cask install private-internet-access
-	brew cask install handbrake
-	brew cask install teamviewer
-	brew cask install grandperspective
 	brew cask install filezilla
-	brew cask install cd-to
+	brew cask install firefox
+	brew cask install franz
+	brew cask install gfxcardstatus
+	brew cask install google-chrome
+	brew cask install grandperspective
+	brew cask install handbrake
+	brew cask install iterm2
+	brew cask install private-internet-access
+	brew cask install spectacle
+	brew cask install steam
+	brew cask install teamviewer
+	brew cask install tunnelblick
 	brew cask install vlc
 endif
 
