@@ -108,6 +108,7 @@ endif
 common_packages: brew sublime vagrant spotify
 ifeq ($(UNAME), Darwin)
 	brew install htop
+	brew install terraform
 	brew cask install android-file-transfer
 	brew cask install android-platform-tools
 	brew cask install arq
