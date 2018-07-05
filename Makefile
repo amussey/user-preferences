@@ -116,9 +116,11 @@ ifeq ($(UNAME), Darwin)
 	brew cask install caffeine
 	brew cask install cd-to
 	brew cask install clocker
+	brew cask install db-browser-for-sqlite
 	brew cask install docker
 	brew cask install docker-toolbox
 	brew cask install dropbox
+	brew cask install duet  # Dual display iOS app
 	brew cask install filezilla
 	brew cask install firefox
 	brew cask install franz
@@ -127,7 +129,9 @@ ifeq ($(UNAME), Darwin)
 	brew cask install grandperspective
 	brew cask install handbrake
 	brew cask install iterm2
+	brew cask install keka
 	brew cask install private-internet-access
+	brew cask install simplenote
 	brew cask install spectacle
 	brew cask install steam
 	brew cask install teamviewer
