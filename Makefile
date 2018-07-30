@@ -14,6 +14,14 @@ ifeq ($(UNAME), Darwin)
 	./files/Karabiner_settings.sh
 endif
 
+android: brew
+ifeq ($(UNAME), Darwin)
+	brew cask install android-file-transfer
+	brew cask install android-platform-tools
+	brew cask install java
+	brew install apktool
+endif
+
 limechat:
 ifeq ($(UNAME), Darwin)
 	cp LimeChat/Themes/* ~/Library/Application\ Support/LimeChat/Themes/
@@ -105,12 +113,10 @@ ifeq ($(UNAME), Darwin)
 	fi
 endif
 
-common_packages: brew sublime vagrant spotify
+common_packages: brew sublime vagrant spotify android
 ifeq ($(UNAME), Darwin)
 	brew install htop
 	brew install terraform
-	brew cask install android-file-transfer
-	brew cask install android-platform-tools
 	brew cask install arq
 	brew cask install bartender
 	brew cask install caffeine
