@@ -117,6 +117,7 @@ common_packages: brew sublime vagrant spotify android
 ifeq ($(UNAME), Darwin)
 	brew install htop
 	brew install terraform
+	brew cask install android-file-transfer
 	brew cask install arq
 	brew cask install bartender
 	brew cask install caffeine
@@ -126,12 +127,12 @@ ifeq ($(UNAME), Darwin)
 	brew cask install docker
 	brew cask install docker-toolbox
 	brew cask install dropbox
-	brew cask install duet  # Dual display iOS app
 	brew cask install filezilla
 	brew cask install firefox
 	brew cask install franz
 	brew cask install gfxcardstatus
 	brew cask install google-chrome
+	brew cask install grammarly
 	brew cask install grandperspective
 	brew cask install handbrake
 	brew cask install iterm2
@@ -143,6 +144,7 @@ ifeq ($(UNAME), Darwin)
 	brew cask install teamviewer
 	brew cask install tunnelblick
 	brew cask install vlc
+	brew cask install vnc-viewer
 endif
 
 # Common packages for Macs.
