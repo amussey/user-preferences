@@ -126,7 +126,6 @@ ifeq ($(UNAME), Darwin)
 	brew cask install docker
 	brew cask install docker-toolbox
 	brew cask install dropbox
-	brew cask install filezilla
 	brew cask install firefox
 	brew cask install franz
 	brew cask install gfxcardstatus
