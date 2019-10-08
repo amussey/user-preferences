@@ -30,8 +30,7 @@ endif
 brew:
 ifeq ($(UNAME), Darwin)
 	command -v brew >/dev/null 2>&1 || { ruby -e "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"; }
-	brew install caskroom/cask/brew-cask
-	brew tap caskroom/versions
+	brew tap homebrew/cask-versions
 endif
 
 vagrant: brew
