@@ -120,7 +120,7 @@ ifeq ($(UNAME), Darwin)
 	brew cask install arq
 	brew cask install bartender
 	brew cask install caffeine
-	brew cask install cd-to
+	brew cask install cd-to-iterm
 	brew cask install clocker
 	brew cask install db-browser-for-sqlite
 	brew cask install docker
