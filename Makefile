@@ -48,7 +48,7 @@ endif
 ifeq ($(UNAME), Linux)
 	sudo apt-get install zsh
 endif
-	git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+	git clone --recursive https://github.com/sorin-ionescu/prezto.git "$${ZDOTDIR:-$${HOME}}/.zprezto"
 	cp ./.zprezto/modules/prompt/functions/prompt_amussey_setup ~/.zprezto/modules/prompt/functions/prompt_amussey_setup
 	cp ./.zpreztorc ~/.zpreztorc
 	cp ./.zshrc ~/.zshrc
