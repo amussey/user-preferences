@@ -151,14 +151,16 @@ endif
 ifeq ($(UNAME), Linux)
 	apt-get update
 	apt-get install \
-		htop \
-		git \
-		wget \
-		curl \
-		lsb_release \
 		build-essential \
-		software-properties-common \
+		curl \
+		git \
+		htop \
+		lsb_release \
 		make \
+		software-properties-common \
+		wget \
+		python-pip \
+		python3-pip \
 		;
 endif
 
