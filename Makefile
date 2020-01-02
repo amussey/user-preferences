@@ -40,6 +40,10 @@ ifeq ($(UNAME), Darwin)
 	brew cask install vagrant-manager
 endif
 
+git:
+	git config --global user.name "Andrew Mussey"
+	git config --global user.email "git@amussey.com"
+
 zsh: brew zshrc_files
 ifeq ($(UNAME), Darwin)
 	command -v zsh >/dev/null 2>&1 || { echo "ZSH already installed and configured."; exit 1; }
