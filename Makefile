@@ -144,6 +144,19 @@ ifeq ($(UNAME), Darwin)
 	brew cask install vlc
 	brew cask install vnc-viewer
 endif
+ifeq ($(UNAME), Linux)
+	apt-get update
+	apt-get install \
+		htop \
+		git \
+		wget \
+		curl \
+		lsb_release \
+		build-essential \
+		software-properties-common \
+		make \
+		;
+endif
 
 # Common packages for Macs.
 mac: osx
