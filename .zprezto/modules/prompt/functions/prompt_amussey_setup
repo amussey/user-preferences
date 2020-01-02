@@ -92,7 +92,7 @@ function prompt_amussey_setup {
 
   # Define prompts.
   # Removed: %(!. %B%F{red}#%f%b.)
-  PROMPT='${USER_MACHINE}${SSH_TTY:+"%F{red}%n%f@%F{yellow}%m%f "}:%F{blue}%~%f${git_info:+${(e)git_info[prompt]}}$python_info[virtualenv]${editor_info[keymap]} '
+  PROMPT='${USER_MACHINE}${SSH_TTY:+"%F{red}%n%f@%F{yellow}%m%f "}:%F{blue}%~%f${git_info:+${(e)git_info[prompt]}}$python_info[virtualenv]${editor_info[keymap]} > '
   RPROMPT='${editor_info[overwrite]}%(?:: %F{red}⏎%f)${VIM:+" %B%F{green}V%f%b"}${INSIDE_EMACS:+" %B%F{green}E%f%b"}${git_info[rprompt]}'
   # RPROMPT='%t'
   SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
