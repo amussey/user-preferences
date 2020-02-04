@@ -82,6 +82,12 @@ ifeq ($(UNAME), Darwin)
 	defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 endif
 
+screenshots:  # Change the directory screenshots are saved to.
+ifeq ($(UNAME), Darwin)
+	mkdir -p ~/Pictures/Screenshots
+	defaults write com.apple.screencapture location ~/Pictures/Screenshots
+endif
+
 save_panel:  # Make the save panel automatically expand.
 ifeq ($(UNAME), Darwin)
 	defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
