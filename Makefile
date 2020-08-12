@@ -29,12 +29,13 @@ ifeq ($(UNAME), Darwin)
 	cp LimeChat/Themes/* ~/Library/Application\ Support/LimeChat/Themes/
 endif
 
-brew:
+brew: ## OSX: Install `brew` and `brew cask`.
 ifeq ($(UNAME), Darwin)
 	command -v brew >/dev/null 2>&1 || { ruby -e "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"; }
 	brew tap homebrew/cask-versions
 endif
 
+vagrant: ## OSX: Install VirtualBox and Vagrant.
 vagrant: brew
 ifeq ($(UNAME), Darwin)
 	brew cask install virtualbox
@@ -42,7 +43,7 @@ ifeq ($(UNAME), Darwin)
 	brew cask install vagrant-manager
 endif
 
-git:
+git: ## Set my default git config.
 	git config --global user.name "Andrew Mussey"
 	git config --global user.email "git@amussey.com"
 
@@ -72,31 +73,31 @@ ifeq ($(UNAME), Darwin)
 	cp ./VSCode/settings.json "/Users/andrewmussey/Library/Application Support/Code/User/settings.json"
 endif
 
-python:
+python: ## OSX: Install Python 2 and 3 with Tkinter support.
 ifeq ($(UNAME), Darwin)
 	brew install tcl-tk
 	brew install python --use-brewed-tk
 	brew install python3 --use-brewed-tk
 endif
 
-photos:  # Stop Photos from automatically opening when an SD card is plugged in.
+photos: ## OSX: Stop Photos from automatically opening when an SD card is plugged in.
 ifeq ($(UNAME), Darwin)
 	defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 endif
 
-screenshots:  # Change the directory screenshots are saved to.
+screenshots: ## OSX: Change the directory screenshots are saved to.
 ifeq ($(UNAME), Darwin)
 	mkdir -p ~/Pictures/Screenshots
 	defaults write com.apple.screencapture location ~/Pictures/Screenshots
 endif
 
-save_panel:  # Make the save panel automatically expand.
+save_panel: ## OSX: Make the save panel automatically expand.
 ifeq ($(UNAME), Darwin)
 	defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
 	defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
 endif
 
-ffmpeg:  # Install ffmpeg.
+ffmpeg: ## OSX: Install ffmpeg.
 ifeq ($(UNAME), Darwin)
 	curl http://www.ffmpegmac.net/resources/SnowLeopard_Lion_Mountain_Lion_Mavericks_Yosemite_El-Captain_06.07.2016.zip -O
 	unzip SnowLeopard_Lion_Mountain_Lion_Mavericks_Yosemite_El-Captain_06.07.2016.zip
@@ -104,7 +105,7 @@ ifeq ($(UNAME), Darwin)
 	mv ff* /usr/local/bin
 endif
 
-duplicati:
+duplicati: ## Install the Duplicati backup software.
 ifeq ($(UNAME), Darwin)
 	brew cask install duplicati
 	sudo curl https://gist.githubusercontent.com/mohakshah/6ec2351bcf8e6898b4a3f79bfc2f12cf/raw/458edb327a7e2a75d1bbd70888dc39b9a3743065/net.duplicati.tray-icon.plist -o /Library/LaunchAgents/net.duplicati.tray-icon.plist
@@ -115,6 +116,7 @@ endif
 zshrc_files:
 	cp -r .zshrc-files ~
 
+spotify: ## Install Spotify and configure common settings.
 spotify: brew
 ifeq ($(UNAME), Darwin)
 	brew cask install spotify
@@ -173,7 +175,10 @@ ifeq ($(UNAME), Linux)
 endif
 
 # Common packages for Macs.
+mac: ## Install common packages for Macs.
 mac: osx
+
+osx: ## Alias for `make mac`
 osx: bootstrap
 bootstrap: sublime vagrant zsh common_packages
 
