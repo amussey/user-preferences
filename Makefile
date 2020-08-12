@@ -1,4 +1,5 @@
 UNAME := $(shell uname)
+WSL_UNAME := $(shell grep -qEi "(Microsoft|WSL)" /proc/version &> /dev/null && echo "WSL-$$(uname)" || uname)
 
 .PHONY: limechat
 

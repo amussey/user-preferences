@@ -116,3 +116,11 @@ function movie-to-gif {
 export PATH="/usr/local/opt/tcl-tk/bin:$PATH"
 
 stty sane
+
+
+if grep -qEi "(Microsoft|WSL)" /proc/version &> /dev/null ; then
+    # echo "Windows 10 Bash"
+    alias subl="/mnt/c/Program\ Files/Sublime\ Text\ 3/subl.exe"
+    alias pbcopy="clip.exe"
+    export PATH=$HOME/bin:$PATH
+fi
