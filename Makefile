@@ -174,3 +174,18 @@ endif
 mac: osx
 osx: bootstrap
 bootstrap: sublime vagrant zsh common_packages
+
+
+.SILENT: help
+.PHONY: help
+help: ## This help dialog.
+	echo -e  "You can run the following commands from this Makefile:\n"
+	IFS=$$'\n' ; \
+	help_lines=(`fgrep -h "## " $(MAKEFILE_LIST) | grep -v '^[#[:space:]]' | sed -e 's/\\$$//' | sort`) ; \
+	for help_line in $${help_lines[@]}; do \
+	    IFS=$$'#' ; \
+	    help_split=($$help_line) ; \
+	    help_command=`echo $${help_split[0]} | sed -e 's/^ *//' -e 's/ *$$//'` ; \
+	    help_info=`echo $${help_split[2]} | sed -e 's/^ *//' -e 's/ *$$//'` ; \
+	    printf "  %-40s %s\n" $$help_command $$help_info ; \
+	done
