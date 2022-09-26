@@ -16,11 +16,12 @@ ifeq ($(UNAME), Darwin)
 	./files/Karabiner_settings.sh
 endif
 
+android: ## OSX: Install the tools necessary for working with Android development.
 android: brew
 ifeq ($(UNAME), Darwin)
-	brew cask install android-file-transfer
-	brew cask install android-platform-tools
-	brew cask install java
+	brew install --cask android-file-transfer
+	brew install --cask android-platform-tools
+	brew install --cask java
 	brew install apktool
 endif
 
