@@ -1,13 +1,16 @@
 SHELL = /bin/bash
 UNAME := $(shell uname)
 WSL_UNAME := $(shell grep -qEi "(Microsoft|WSL)" /proc/version &> /dev/null && echo "WSL-$$(uname)" || uname)
+RUNTIME := $(shell date '+%Y-%m-%d_%H-%M-%S')
 
 .PHONY: limechat
 
-keybindings:
+keybindings:  ## OSX: Update the keybindings to better match Windows.
 ifeq ($(UNAME), Darwin)
 	-mkdir ~/Library/KeyBindings
-	cp ./files/DefaultKeyBinding.dict ~/Library/KeyBindings/DefaultKeyBinding2.dict
+	touch ~/Library/KeyBindings/DefaultKeyBinding.dict
+	mv ~/Library/KeyBindings/DefaultKeyBinding.dict ~/Library/KeyBindings/DefaultKeyBinding.dict.$(RUNTIME)
+	cp ./files/DefaultKeyBinding.dict ~/Library/KeyBindings/DefaultKeyBinding.dict
 endif
 
 karabiner:
