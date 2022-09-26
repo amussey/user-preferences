@@ -111,7 +111,7 @@ endif
 
 duplicati: ## Install the Duplicati backup software.
 ifeq ($(UNAME), Darwin)
-	brew cask install duplicati
+	brew install --cask duplicati
 	sudo curl https://gist.githubusercontent.com/mohakshah/6ec2351bcf8e6898b4a3f79bfc2f12cf/raw/458edb327a7e2a75d1bbd70888dc39b9a3743065/net.duplicati.tray-icon.plist -o /Library/LaunchAgents/net.duplicati.tray-icon.plist
 	sudo curl https://gist.githubusercontent.com/mohakshah/6ec2351bcf8e6898b4a3f79bfc2f12cf/raw/458edb327a7e2a75d1bbd70888dc39b9a3743065/net.duplicati.server.plist -o /Library/LaunchDaemons/net.duplicati.server.plist
 	sudo launchctl load -w /Library/LaunchDaemons/net.duplicati.server.plist
