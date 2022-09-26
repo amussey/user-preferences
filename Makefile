@@ -1,5 +1,6 @@
 SHELL = /bin/bash
 UNAME := $(shell uname)
+ARCH := $(shell uname -m)
 WSL_UNAME := $(shell grep -qEi "(Microsoft|WSL)" /proc/version &> /dev/null && echo "WSL-$$(uname)" || uname)
 RUNTIME := $(shell date '+%Y-%m-%d_%H-%M-%S')
 
@@ -128,44 +129,69 @@ zshrc_files:
 spotify: ## Install Spotify and configure common settings.
 spotify: brew
 ifeq ($(UNAME), Darwin)
-	brew cask install spotify
+	brew install --cask spotify
+	@echo "Limiting disk cache to 2048 MB"
 	if [ ! $$(grep "storage.size" "$$HOME/Library/Application Support/Spotify/prefs") ] ; \
 	then echo "storage.size=2048" >> "$$HOME/Library/Application Support/Spotify/prefs" ; \
 	else echo "prefs already updated." ; \
 	fi
 endif
 
-common_packages: brew sublime vagrant spotify android
+mac_intel: brew
 ifeq ($(UNAME), Darwin)
-	brew install htop
-	brew install terraform
-	brew cask install android-file-transfer
-	brew cask install arq
-	brew cask install bartender
-	brew cask install caffeine
-	brew cask install cd-to-iterm
-	brew cask install clocker
-	brew cask install db-browser-for-sqlite
-	brew cask install docker
-	brew cask install docker-toolbox
-	brew cask install dropbox
-	brew cask install firefox
-	brew cask install franz
-	brew cask install gfxcardstatus
-	brew cask install google-chrome
-	brew cask install grammarly
-	brew cask install grandperspective
-	brew cask install handbrake
-	brew cask install iterm2
-	brew cask install keka
-	brew cask install private-internet-access
-	brew cask install simplenote
-	brew cask install spectacle
-	brew cask install steam
-	brew cask install teamviewer
-	brew cask install tunnelblick
-	brew cask install vlc
-	brew cask install vnc-viewer
+  ifneq ($(ARCH), arm64)
+	brew install --cask gfxcardstatus
+  else
+	@echo "$(ARCH) detected, skipping Intel software installs"
+  endif
+endif
+
+devops: ## OSX: Tools for development and systems operations
+devops: brew
+ifeq ($(UNAME), Darwin)
+	brew install --cask htop
+	brew install --cask terraform
+	brew install --cask db-browser-for-sqlite
+	brew install --cask docker
+	brew install --cask docker-toolbox
+	brew install --cask iterm2
+endif
+
+video: ## OSX: Tools for video playback, encoding, and compression.
+video: brew
+ifeq ($(UNAME), Darwin)
+	brew install ffmpeg
+	brew install --cask handbrake
+	brew install --cask vlc
+endif
+
+games: brew
+
+	brew install --cask steam
+
+common_packages: brew
+ifeq ($(UNAME), Darwin)
+	$(MAKE) android
+	$(MAKE) aws
+	$(MAKE) devops
+	$(MAKE) spotify
+	$(MAKE) video
+	$(MAKE) vscode
+	brew install --cask arq
+	brew install --cask bartender
+	brew install --cask caffeine
+	brew install --cask cd-to-iterm
+	brew install --cask clocker
+	brew install --cask dropbox
+	brew install --cask google-chrome
+	brew install --cask grammarly
+	brew install --cask grandperspective
+	brew install --cask keka
+	brew install --cask simplenote
+	brew install --cask teamviewer
+	brew install --cask tunnelblick
+	brew install --cask text-bar
+	brew install --cask vnc-viewer
 endif
 ifeq ($(UNAME), Linux)
 	apt-get update
@@ -189,7 +215,7 @@ mac: osx
 
 osx: ## Alias for `make mac`
 osx: bootstrap
-bootstrap: sublime vagrant zsh common_packages
+bootstrap: zsh common_packages
 
 
 .SILENT: help
