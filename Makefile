@@ -42,22 +42,24 @@ endif
 
 brew: ## OSX: Install `brew`.
 ifeq ($(UNAME), Darwin)
-	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+	-command -v brew >/dev/null 2>&1 && /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 endif
 
 vagrant: ## OSX: Install VirtualBox and Vagrant.
 vagrant: brew
 ifeq ($(UNAME), Darwin)
-	brew cask install virtualbox
-	brew cask install vagrant
-	brew cask install vagrant-manager
+	brew install --cask virtualbox
+	brew install --cask vagrant
+	brew install --cask vagrant-manager
 endif
 
 git: ## Set my default git config.
 	git config --global user.name "Andrew Mussey"
 	git config --global user.email "git@amussey.com"
+	# Push up the local branch
+	git config --global push.default current
 
-zsh: brew zshrc_files
+zsh: zshrc_files
 ifeq ($(UNAME), Darwin)
 	command -v zsh >/dev/null 2>&1 || { echo "ZSH already installed and configured."; exit 1; }
 	brew install zsh
