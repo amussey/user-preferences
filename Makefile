@@ -28,15 +28,14 @@ ifeq ($(UNAME), Darwin)
 	brew install apktool
 endif
 
-limechat:
+limechat: ## OSX: Add additional themes for the Limechat IRC client.
 ifeq ($(UNAME), Darwin)
 	cp LimeChat/Themes/* ~/Library/Application\ Support/LimeChat/Themes/
 endif
 
-brew: ## OSX: Install `brew` and `brew cask`.
+brew: ## OSX: Install `brew`.
 ifeq ($(UNAME), Darwin)
-	command -v brew >/dev/null 2>&1 || { ruby -e "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"; }
-	brew tap homebrew/cask-versions
+	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 endif
 
 vagrant: ## OSX: Install VirtualBox and Vagrant.
