@@ -28,6 +28,12 @@ ifeq ($(UNAME), Darwin)
 	brew install apktool
 endif
 
+aws: ## OS: Install tools helpful for working with AWS.
+ifeq ($(UNAME), Darwin)
+	brew install awscli
+	brew install --cask aws-vpn-client
+endif
+
 limechat: ## OSX: Add additional themes for the Limechat IRC client.
 ifeq ($(UNAME), Darwin)
 	cp LimeChat/Themes/* ~/Library/Application\ Support/LimeChat/Themes/
