@@ -77,9 +77,9 @@ endif
 
 vscode: brew
 ifeq ($(UNAME), Darwin)
-	brew cask install visual-studio-code
-	mv "/Users/andrewmussey/Library/Application Support/Code/User/settings.json" "/Users/andrewmussey/Library/Application Support/Code/User/settings.`date -u +"%Y-%m-%d_%H-%M-%S"`.json"
-	cp ./VSCode/settings.json "/Users/andrewmussey/Library/Application Support/Code/User/settings.json"
+	brew install --cask visual-studio-code
+	mv ~/Library/Application\ Support/Code/User/settings.json ~/Library/Application\ Support/Code/User/settings.$(RUNTIME).json"
+	cp ./VSCode/settings.json ~/Library/Application\ Support/Code/User/settings.json
 endif
 
 python: ## OSX: Install Python 2 and 3 with Tkinter support.
